@@ -26,12 +26,19 @@ a {
     background-color: khaki;
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Game Style */
 
 .game {
     display: grid;
-    width: clamp(40vw, 600px, 90vw);
-    height: clamp(40vw, 600px, 90vw);
+    width: clamp(30vw, 400px, 90vw);
+    height: clamp(30vw, 400px, 90vw);
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 }
@@ -42,6 +49,15 @@ a {
 }
 
 .big-text {
-    font-size: max(10vw, 10vh);
+    font-size: max(5vw, 10vh);
     margin: 0;
+}
+
+.reset {
+    border: 2px solid rgb(82, 78, 47);
+    border-radius: 10%;
+    color: rgb(82, 78, 47);
+    background-color: khaki;
+    margin: 5%;
+    cursor: pointer;
 }

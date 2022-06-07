@@ -37,8 +37,23 @@ const changeMatrix = (location, board, sign) => {
     board[coordinates.row][coordinates.column] = sign;
 }
 
+const play = (box, sign) => {
+    const p = document.createElement("p");
+    p.classList.add("big-text");
+    p.textContent = sign;
+    box.appendChild(p);
+    changeMatrix(box.id, board, sign);
+    round++;
+}
+
 // Game Matrix
 let board = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+const defaultBoard = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9]
@@ -48,27 +63,27 @@ let round = 1;
 
 const boxes = document.querySelectorAll(".box");
 const result = document.querySelector(".winner");
+const resetBtn = document.querySelector(".reset");
 
 boxes.forEach(box => {
     box.addEventListener("click", () => {
         if (round%2 == 1 && !box.hasChildNodes()) {
-            const p = document.createElement("p");
-            p.classList.add("big-text");
-            p.textContent = "X";
-            box.appendChild(p);
-            changeMatrix(box.id, board, "X");
-            round++;
+            play(box, "X");
         } else if (round%2 == 0 && !box.hasChildNodes()) {
-            const p = document.createElement("p");
-            p.classList.add("big-text");
-            p.textContent = "O";
-            box.appendChild(p);
-            changeMatrix(box.id, board, "O");
-            round++;
+            play(box, "O");
         }
         const winner = checkWinner(board);
         if (winner.win) {
             result.textContent = `Winner is ${winner.winner}`;
+            board = defaultBoard;
         }
     });
+});
+
+resetBtn.addEventListener("click", () => {
+    boxes.forEach(box => {
+        box.innerHTML = "";
+        result.innerHTML = "";
+        round = 1;
+    })
 });
